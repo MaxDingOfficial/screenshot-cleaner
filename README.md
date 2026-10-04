@@ -2,7 +2,7 @@
 
 一个原生 macOS 小工具，按时间筛选截屏，预览后将选中的图片移至废纸篓或彻底删除。
 
-由 **OscarkjDing** 发起并维护，使用 OpenAI Codex 辅助开发。
+由 **MaxDingOfficial** 发起并维护，使用 OpenAI Codex 辅助开发。
 
 ## 功能
 
@@ -20,7 +20,7 @@
 
 当前版本已在 Apple 芯片 Mac 上启动并验证。Intel 版本完成编译，尚未在 Intel 机器上运行测试。
 
-在 [Releases](https://github.com/OscarkjDing/screenshot-cleaner/releases) 下载应用压缩包，解压后打开。
+在 [Releases](https://github.com/MaxDingOfficial/screenshot-cleaner/releases) 下载应用压缩包，解压后打开。
 
 双击构建得到的 `截屏清理.app`，或者拖入“应用程序”文件夹。第一次访问受保护文件夹时，按 macOS 提示授予相应访问权限。
 
