@@ -1,0 +1,18 @@
+#!/bin/zsh
+set -eu
+SOURCE_DIR="${0:A:h}"
+DEST_DIR="${1:-$SOURCE_DIR/build}"
+APP_PATH="$DEST_DIR/截屏清理.app"
+BUILD_WORK="$SOURCE_DIR/.build"
+mkdir -p "$BUILD_WORK" "$APP_PATH/Contents/MacOS" "$APP_PATH/Contents/Resources"
+xcrun swiftc -swift-version 5 -O -target arm64-apple-macosx13.0 "$SOURCE_DIR/CleanerCore.swift" "$SOURCE_DIR/ScreenshotCleanerApp.swift" -o "$BUILD_WORK/arm64"
+xcrun swiftc -swift-version 5 -O -target x86_64-apple-macosx13.0 "$SOURCE_DIR/CleanerCore.swift" "$SOURCE_DIR/ScreenshotCleanerApp.swift" -o "$BUILD_WORK/x86_64"
+xcrun lipo -create "$BUILD_WORK/arm64" "$BUILD_WORK/x86_64" -output "$APP_PATH/Contents/MacOS/ScreenshotCleaner"
+swift "$SOURCE_DIR/MakeIcon.swift" "$BUILD_WORK/AppIcon.iconset"
+iconutil -c icns "$BUILD_WORK/AppIcon.iconset" -o "$APP_PATH/Contents/Resources/AppIcon.icns"
+cp "$SOURCE_DIR/Info.plist" "$APP_PATH/Contents/Info.plist"
+chmod 755 "$APP_PATH/Contents/MacOS/ScreenshotCleaner"
+xattr -cr "$APP_PATH"
+codesign --force --sign - "$APP_PATH"
+codesign --verify --deep --strict "$APP_PATH"
+print "已生成：$APP_PATH"

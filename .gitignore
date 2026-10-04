@@ -1,0 +1,10 @@
+.DS_Store
+.build/
+build/
+CoreTests
+ScreenshotCleaner
+*.app/
+*.zip
+*.dSYM/
+core
+core.*
